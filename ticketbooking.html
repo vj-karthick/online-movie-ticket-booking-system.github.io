@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Booking</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <br>
+  <div class="container">
+    <a href="upcomingmovie.html"><button style="background-color: blue;color: antiquewhite ;"> View Upcoming Movies</button></a>
+  </div>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Movie Ticket Booking</h1>
+
+    <!-- Movie Details Table -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Movie</th>
+          <th>Genre</th>
+          <th>Showtimes</th>
+          <th>Tickets Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jailer</td>
+          <td>Action</td>
+          <td>10:00 AM, 2:00 PM, 6:00 PM</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>DD Returns</td>
+          <td>Comedy and Horror</td>
+          <td>11:00 AM, 3:00 PM, 7:00 PM</td>
+          <td>80</td>
+        </tr>
+        <!-- Add more movies here -->
+      </tbody>
+    </table>
+
+    <!-- Booking Form -->
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="movieSelect">Select Movie:</label>
+        <select class="form-control" id="movieSelect" required>
+          <option value="">Choose...</option>
+          <option value="Jailer">Jailer</option>
+          <option value="DD Returns">DD Returns</option>
+          <!-- Add more movie options here -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="TheatreSelect">Select Theatre:</label>
+        <select class="form-control" id="theatreSelect" required>
+          <option value="">Choose...</option>
+          <option value="Lathangi">Lathangi</option>
+          <option value="Anusham">Anusham</option>
+          <option value="Thangam cinemas">Thangam cinemas</option>
+          <option value="Durais">Durais</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="showtimeSelect">Select Showtime:</label>
+        <select class="form-control" id="showtimeSelect" required>
+          <!-- Showtimes will be dynamically updated using jQuery -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="numTickets">Number of Tickets:</label>
+        <input type="number" class="form-control" id="numTickets" min="1" max="10" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Book Tickets</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- jQuery and AJAX -->
+  <script>
+    $(document).ready(function() {
+      // Define movie data (in a real application, this would come from the server)
+      var movieData = {
+        "Jailer": ["10:00 AM", "2:00 PM", "6:00 PM"],
+        "DD Returns": ["11:00 AM", "3:00 PM", "7:00 PM"]
+        // Add more movies and showtimes here
+      };
+
+      // Event handler for movie selection
+      $("#movieSelect").change(function() {
+        var selectedMovie = $(this).val();
+        var showtimes = movieData[selectedMovie];
+        var showtimeSelect = $("#showtimeSelect");
+
+        // Clear previous options
+        showtimeSelect.empty();
+
+        // Add the new showtime options
+        if (showtimes) {
+          $.each(showtimes, function(index, showtime) {
+            showtimeSelect.append($("<option>", {
+              value: showtime,
+              text: showtime
+            }));
+          });
+        } else {
+          showtimeSelect.append($("<option>", {
+            value: "",
+            text: "No showtimes available"
+          }));
+        }
+      });
+
+      // Event handler for form submission (you can add your AJAX logic here)
+      $("#bookingForm").submit(function(event) {
+        event.preventDefault();
+        // Your AJAX code to submit the booking data to the server goes here
+        alert("Booking submitted!");
+      });
+    });
+  </script>
+</body>
+</html>

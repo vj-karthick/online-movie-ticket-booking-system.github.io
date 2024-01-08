@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Booking System</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-color: yellow;">
+  <div class="container mt-4">
+    <h1 class="mb-4">Movie Ticket Booking System</h1>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#now-showing">Now Showing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#upcoming">Upcoming</a>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3">
+      <div class="tab-pane fade show active" id="now-showing">
+        <div class="alert alert-info">
+          <strong>Avengers: Endgame</strong> - Now showing in theaters!
+        </div>
+        <div class="alert alert-success">
+          <strong>The Lion King</strong> - Book your tickets now!
+        </div>
+      </div>
+      <div class="tab-pane fade" id="upcoming">
+        <div class="alert alert-warning">
+          <strong>Spider-Man: No Way Home</strong> - Coming soon!
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-4">Choose your movie:</h2>
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action movie" data-movie="Avengers: Endgame">Avengers: Endgame</a>
+      <a href="#" class="list-group-item list-group-item-action movie" data-movie="The Lion King">The Lion King</a>
+      <a href="#" class="list-group-item list-group-item-action movie" data-movie="Spider-Man: No Way Home">Spider-Man: No Way Home</a>
+    </div>
+
+    <h2 class="mt-4">Your Selection:</h2>
+    <div class="alert alert-primary">
+      <strong>You have selected:</strong> <span id="selectedMovie">None</span>
+      <span class="badge badge-secondary ml-2" id="ticketCount">0 ticket</span>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- jQuery and AJAX script -->
+  <script>
+    $(document).ready(function() {
+      let selectedMovie = "";
+      let ticketCount =14;
+
+      // Handle movie selection
+      $(".movie").click(function() {
+        selectedMovie = $(this).data("movie");
+        updateSelection();
+      });
+
+      // Update selection information
+      function updateSelection() {
+        $("#selectedMovie").text(selectedMovie);
+        $("#ticketCount").text(ticketCount + " ticket" + (ticketCount !== 1 ? "s" : ""));
+      }
+    });
+  </script>
+</body>
+</html>
